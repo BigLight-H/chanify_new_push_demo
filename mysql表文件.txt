@@ -1,0 +1,25 @@
+CREATE TABLE `channel` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL COMMENT '频道名称',
+  `channel` varchar(255) DEFAULT NULL COMMENT '频道KEY',
+  `url` varchar(100) DEFAULT NULL COMMENT 'api链接',
+  `type` tinyint(2) DEFAULT NULL COMMENT '类型:1,社会;2,国内;3,国际;4,科技;5,IT;6,互联网;7,综合;8,头条;9,简报;10,天气;11,生活',
+  `status` tinyint(1) DEFAULT '1' COMMENT '状态:1正常,0冻结',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `channel` (`channel`) USING BTREE,
+  KEY `status` (`type`,`status`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='用户频道表';
+
+
+CREATE TABLE `city` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL COMMENT '城市名称',
+  `city` int(15) DEFAULT NULL COMMENT '城市ID',
+  `push` text COMMENT '推送频道id',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `city` (`city`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='城市ID表';
