@@ -2,7 +2,8 @@
 
 namespace App\Console;
 
-use App\Console\Commands\PushConsole;
+use App\Console\Commands\PushNewsConsole;
+use App\Console\Commands\PushWeatherConsole;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,7 +15,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        PushConsole::class
+        PushWeatherConsole::class,
+        PushNewsConsole::class
     ];
 
     /**
@@ -26,6 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('push_weather')->twiceDaily(7, 17);
         $schedule->command('push_news')->twiceDaily(7, 17);
     }
 

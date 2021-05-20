@@ -6,9 +6,8 @@ namespace App\Console\Commands;
 
 use App\Service\PushService;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 
-class PushConsole extends Command
+class PushNewsConsole extends Command
 {
     /**
      * The name and signature of the console command.
@@ -22,7 +21,7 @@ class PushConsole extends Command
      *
      * @var string
      */
-    protected $description = '推送新闻消息';
+    protected $description = '推送每日新闻';
 
     /**
      * Create a new command instance.
@@ -42,9 +41,6 @@ class PushConsole extends Command
     public function handle()
     {
         $p = new PushService();
-        $p->weather();
-        $p->live();
         $p->getTodayNews();
-        Log::info('zddddd');
     }
 }
