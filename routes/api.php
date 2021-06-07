@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\RedGifsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,6 @@ use App\Http\Controllers\IndexController;
 Route::get('/weather/mj', [IndexController::class, 'weather']);//天气
 Route::get('/live/mj', [IndexController::class, 'live']);//生活指数
 Route::get('/news', [IndexController::class, 'getTodayNews']);//社会新闻
+
+//推送跟随消息到tg
+Route::get('/follows', [RedGifsController::class, 'index']);//获取跟随列表
