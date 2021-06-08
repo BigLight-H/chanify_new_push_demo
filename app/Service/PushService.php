@@ -28,9 +28,6 @@ class PushService
                     if(in_array($v['id'], $cs)) {
                         //获取天气信息
                         $data = $this->getWeather(config('mojiapi.weather.name'), config('mojiapi.weather.api'), $c['city'], config('mojiapi.weather.token'));
-                        print_r($data);exit;
-
-
                         //发送天气信息到手机APP频道
                         $city = $data['city'];
                         $title = $city['name'].'天气预报';
