@@ -63,8 +63,8 @@ class TGConsole extends Command
             $num =  preg_replace('/\D/s', '', $str);
             if ($num) {
                 sleep($num);
-                $this->goPush();
                 $push->pushTgError('沉睡'.$num.'后重新拉起服务!');
+                $this->goPush();
             } else {
                 $push->pushTgError('定时推送错误:'.$e->getMessage());
             }
