@@ -64,17 +64,23 @@ class pushTgService
         $ret = $this->httpPush($url, $limit);
 
         if($ret['gfycats']??null) {
+            $num = 0;
             foreach ($ret['gfycats'] as $val) {
                 if(!array_key_exists('mobile', $val['content_urls'])) {
                     continue;
                 }
                 $mp4 = $val['content_urls']['mobile']['url'];
                 if(!Redis::HEXISTS('follows_list_detail_urls', $mp4)) {
+                    if($num>50) {
+                        sleep(10);
+                        $num = 0;
+                    }
                     //推送到tg机器人
                     $client = new GuzzleHttp\Client();
                     $client->request('GET', $telegram_api_url.'/sendVideo?video='.$mp4.'&chat_id='.$chat_id);
                     //连接加入redis
                     Redis::hset('follows_list_detail_urls', $mp4, 1);
+                    $num++;
                 }
             }
         }
