@@ -71,7 +71,7 @@ class pushTgService
                 }
                 $mp4 = $val['content_urls']['mobile']['url'];
                 if(!Redis::HEXISTS('follows_list_detail_urls', $mp4)) {
-                    if($num>50) {
+                    if($num>10) {
                         sleep(10);
                         $num = 0;
                     }
