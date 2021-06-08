@@ -123,7 +123,7 @@ class IndexController extends Controller
         curl_close($curl);
         //显示获得的数据
         $ret = json_decode($data, true);
-        if ($ret['data']) {
+        if ($ret['data']??null) {
             Redis::setex($key.$city, 86300, json_encode($ret['data']));//缓存30分钟
             return $ret['data'];
         }
