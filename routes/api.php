@@ -22,3 +22,4 @@ Route::get('/news', [IndexController::class, 'getTodayNews']);//社会新闻
 
 //推送跟随消息到tg
 Route::get('/follows', [RedGifsController::class, 'index']);//获取跟随列表
+Route::get('/set/follows', [RedGifsController::class, 'setFollows']);//写入跟随列表

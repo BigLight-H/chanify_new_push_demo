@@ -196,4 +196,16 @@ class PushService
             echo json_encode(['msg' => '推送'.$titleName.'完成!']);
         }
     }
+
+    /**
+     * 推送警报
+     * @param $message
+     */
+    public function pushTgError($message): void
+    {
+        $key = env('ERROR_KEY');
+        $this->push($message, $key);
+    }
+
+
 }

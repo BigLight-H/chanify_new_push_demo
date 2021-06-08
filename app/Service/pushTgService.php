@@ -1,23 +1,33 @@
 <?php
 
 
-namespace App\Http\Controllers;
-
-use App\Service\PushService;
+namespace App\Service;
 use GuzzleHttp;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
-class RedGifsController extends Controller
+class pushTgService
 {
     /**
-     * 获取订阅列表
-     * @param Request $request
+     * 推送r18消息到指定频道
      * @throws GuzzleHttp\Exception\GuzzleException
      */
-    public function index(Request $request): void
+    public function pushR18(): void
     {
-        $limit = $request->input('limit');
+        $start = env('R18_PAGE_START');
+        $end = env('R18_PAGE_END');
+        $url = env('R18_URL');
+        $pick_url = env('R18_PICK_URL');
+        $client = new GuzzleHttp\Client();
+        $client->request('GET', $pick_url.$start.'&end='.$end.'&url='.$url);
+    }
+
+    /**
+     * 获取订阅列表
+     * @throws GuzzleHttp\Exception\GuzzleException
+     */
+    public function pushRedGif(): void
+    {
+        $limit = 100;
         $ret = $this->getFollows();
         if ($ret['follows']??null) {
             $this->getFollowsDetail($ret['follows'], $limit);
@@ -101,43 +111,6 @@ class RedGifsController extends Controller
     }
 
     /**
-     * 写入新的收藏数据
-     * @param Request $request
-     */
-    public function setFollows(Request $request): void
-    {
-        $limit = $request->input('limit', 100);
-        $token = $request->input('token');
-        $url = env('FOLLOWS_URL');
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $url . $limit,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer ' . $token
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        $ret = json_decode($response, true);
-        if($ret['follows']) {
-            //删除之前的redis缓存
-            Redis::del($url);
-            //存入新数据redis
-            Redis::set($url, $response);//缓存一天
-        }
-    }
-
-    /**
      * 获取收藏列表
      * @return array|mixed
      */
@@ -150,8 +123,5 @@ class RedGifsController extends Controller
         //显示获得的数据
         return json_decode($response, true) ?? [];
     }
-
-
-
 
 }
