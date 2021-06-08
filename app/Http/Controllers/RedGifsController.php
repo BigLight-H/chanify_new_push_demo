@@ -56,6 +56,9 @@ class RedGifsController extends Controller
         if($ret['gfycats']??null) {
             foreach ($ret['gfycats'] as $val) {
                 $mp4 = $val['content_urls']['mobile']['url'];
+                if(!array_key_exists('mobile', $val['content_urls'])) {
+                    continue;
+                }
                 if(!Redis::HEXISTS('follows_list_detail_urls', $mp4)) {
                     //推送到tg机器人
                     $client = new GuzzleHttp\Client();
