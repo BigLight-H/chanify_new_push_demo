@@ -171,7 +171,7 @@ class PushService
         ]);
         if ($res->status() === 200) {
             $data = json_decode($res->body(), true);
-            $list = $data['newslist'];
+            $list = $data['newslist'] ?? '';
             $title = date('Y-m-d H:i') . $titleName;
             $content = PHP_EOL . PHP_EOL;
             if ($list) {
