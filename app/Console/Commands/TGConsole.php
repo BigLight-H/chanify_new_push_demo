@@ -42,13 +42,22 @@ class TGConsole extends Command
      */
     public function handle(): void
     {
-        $tg = new pushTgService();
         $push = new PushService();
+
+        $this->goPush();
+        $push->pushTgError('推送完成!');
+
+    }
+
+    public function goPush(): void
+    {
+        $tg = new pushTgService();
         try {
             $tg->pushR18();
             $tg->pushRedGif();
-            $push->pushTgError('推送完成!');
         } catch (GuzzleException $e) {
+            $error = $e->getMessage();
+            print_r($error);exit;
             $push->pushTgError('定时推送错误:'.$e->getMessage());
         }
     }
