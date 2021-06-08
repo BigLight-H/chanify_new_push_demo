@@ -134,7 +134,9 @@ class RedGifsController extends Controller
             Redis::del($url);
             //存入新数据redis
             Redis::set($url, $response);//缓存一天
+            echo json_encode('写入成功!');
         }
+        echo json_encode('写入失败!');
     }
 
     /**
