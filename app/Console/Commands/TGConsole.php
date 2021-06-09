@@ -56,7 +56,7 @@ class TGConsole extends Command
         $tg = new pushTgService();
         try {
             $tg->pushR18();
-            //$tg->pushRedGif();暂时屏蔽
+            $tg->pushRedGif();
         } catch (GuzzleException $e) {
             $error = $e->getMessage();
             $str = substr($error,strripos($error,"retry_after")+1);

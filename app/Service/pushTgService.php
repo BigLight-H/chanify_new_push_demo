@@ -45,6 +45,9 @@ class pushTgService
     public function getFollowsDetail($arr, $limit): void
     {
         foreach($arr as $val) {
+            if (Redis::get('push_tg_number'.date('Ymd')) >= 20) {
+                break;
+            }
             $this->getFollowsLists($val['username'], $limit);
         }
     }
@@ -68,6 +71,10 @@ class pushTgService
                 if(!array_key_exists('mobile', $val['content_urls'])) {
                     continue;
                 }
+                //限制个数
+                if (Redis::get('push_tg_number'.date('Ymd')) >= 20) {
+                    break;
+                }
                 $mp4 = $val['content_urls']['mobile']['url'];
                 if(!Redis::HEXISTS('follows_list_detail_urls', $mp4)) {
                     //推送到tg机器人
@@ -75,6 +82,9 @@ class pushTgService
                     $client->request('GET', $telegram_api_url.'/sendVideo?video='.$mp4.'&chat_id='.$chat_id);
                     //连接加入redis
                     Redis::hset('follows_list_detail_urls', $mp4, 1);
+                    //增加今日推送个数,每日推送20个
+                    Redis::INCR('push_tg_number'.date('Ymd'));
+                    Redis::Expire('push_tg_number'.date('Ymd'), 86400);
                 }
             }
         }
