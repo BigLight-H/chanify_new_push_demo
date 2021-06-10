@@ -177,19 +177,22 @@ class PushService
             if ($list) {
                 $num = 0;
                 foreach ($list as $k => $val) {
-                    if ($val['url']) {
-                        $content .= ($k + 1) . '、' . $val['title'] . ';链接：' . $val['url']. PHP_EOL;
-                    } else {
-                        $content .= ($k + 1) . '、' . $val['title'] . PHP_EOL;
-                    }
+                    if (!Redis::HEXISTS('old-news-titles', md5($val['title']))) {
+                        if ($val['url']) {
+                            $content .= ($k + 1) . '、' . $val['title'] . ';链接：' . $val['url']. PHP_EOL;
+                        } else {
+                            $content .= ($k + 1) . '、' . $val['title'] . PHP_EOL;
+                        }
 
-                    $num++;
-                    if($num==5) {
-                        $con = $title . $content;
-                        //推送新闻
-                        $this->push($con, $appKey);
-                        $num = 0;
-                        $content = PHP_EOL . PHP_EOL;
+                        $num++;
+                        if($num==5) {
+                            $con = $title . $content;
+                            //推送新闻
+                            $this->push($con, $appKey);
+                            $num = 0;
+                            $content = PHP_EOL . PHP_EOL;
+                        }
+                        Redis::hset('old-news-titles', md5($val['title']), 1);
                     }
                 }
             }
@@ -206,6 +209,16 @@ class PushService
         $key = env('ERROR_KEY');
         $this->push($message, $key);
     }
+
+    /**
+     * 删除redis缓存
+     */
+    public function delPushNewsOld(): void
+    {
+        //删除redis
+        Redis::del('old-news-titles');
+    }
+
 
 
 }
