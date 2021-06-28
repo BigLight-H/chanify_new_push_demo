@@ -217,7 +217,33 @@ class PushService
     {
         //删除redis
         Redis::del('old-news-titles');
+        Redis::del('news_titles');
     }
+
+    /**
+     * 获取今日新闻推送给手机
+     */
+    public function getTodayHotNewsPush()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'http://106.53.227.136:49000/hot/news',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        curl_exec($curl);
+
+        curl_close($curl);
+    }
+
+
 
 
 

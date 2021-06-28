@@ -41,7 +41,7 @@ class PushNewsConsole extends Command
     public function handle()
     {
         $p = new PushService();
-        $p->getTodayNews();
+        $p->getTodayHotNewsPush();
         if (date('d',time()) === '01') {
             $p->delPushNewsOld();
         }

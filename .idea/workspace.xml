@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a5f016a-05ae-491f-a776-2d76d233c4c6" name="默认变更列表" comment="">
+    <list default="true" id="be162017-d43f-431c-abe8-303dfea7c03f" name="默认变更列表" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Models/RedgifToken.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Models/VideoLinks.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Console/Commands/PushNewsConsole.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/PushNewsConsole.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RedGifsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RedGifsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Service/PushService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Service/PushService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Service/pushTgService.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Service/pushTgService.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -130,17 +134,15 @@
       <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
     </include_path>
   </component>
-  <component name="ProjectId" id="1tc3B6mq0NUczQhv3tqG3M2RET0" />
+  <component name="ProjectId" id="1uR4HmIETtByabq74Kk22EH37RJ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -152,13 +154,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
-      <changelist id="8a5f016a-05ae-491f-a776-2d76d233c4c6" name="默认变更列表" comment="" />
-      <created>1623054412098</created>
+      <changelist id="be162017-d43f-431c-abe8-303dfea7c03f" name="默认变更列表" comment="" />
+      <created>1624614982491</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1623054412098</updated>
-      <workItem from="1623054414651" duration="27635000" />
-      <workItem from="1623309353026" duration="1671000" />
+      <updated>1624614982491</updated>
+      <workItem from="1624614984321" duration="10878000" />
     </task>
     <servers />
   </component>
@@ -178,6 +179,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

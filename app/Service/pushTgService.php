@@ -2,6 +2,7 @@
 
 
 namespace App\Service;
+use App\Models\VideoLinks;
 use GuzzleHttp;
 use Illuminate\Support\Facades\Redis;
 
@@ -82,6 +83,8 @@ class pushTgService
                     $client->request('GET', $telegram_api_url.'/sendVideo?video='.$mp4.'&chat_id='.$chat_id);
                     //连接加入redis
                     Redis::hset('follows_list_detail_urls', $mp4, 1);
+                    //存入数据库
+                    VideoLinks::insert(['link' => $mp4]);
                     //增加今日推送个数,每日推送20个
                     Redis::INCR('push_tg_number'.date('Ymd'));
                     Redis::Expire('push_tg_number'.date('Ymd'), 86400);

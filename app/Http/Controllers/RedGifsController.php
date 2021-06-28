@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RedgifToken;
 use App\Service\PushService;
 use GuzzleHttp;
 use Illuminate\Http\Request;
@@ -109,8 +110,8 @@ class RedGifsController extends Controller
      */
     public function setFollows(Request $request): void
     {
+        $token = (new RedgifToken())->where('id', 1)->value('token');
         $limit = $request->input('limit', 100);
-        $token = $request->input('token');
         $url = env('FOLLOWS_URL');
         $curl = curl_init();
 
